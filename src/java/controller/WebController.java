@@ -129,6 +129,13 @@ public class WebController extends HttpServlet {
                         .forward(request, response);
                 break;
             case "/returnBook":
+                String historyId = request.getParameter("historyId");
+                history=historyFacade.find(new Long(historyId));
+                c = new GregorianCalendar();
+                history.setDateReturnBook(c.getTime());
+                historyFacade.edit(history);
+                request.getRequestDispatcher("/index.jsp")
+                        .forward(request, response);
                 
                 break;
         }
